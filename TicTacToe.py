@@ -14,13 +14,15 @@ BLANK = None
 #                 R    G    B
 BLACK =         (  0,   0,   0)
 WHITE =         (255, 255, 255)
+BLUE =         (  0,   0,   255)
+RED =         (255,   0,   0)
 
 BGCOLOR = WHITE
-TILECOLOR = None
+TILECOLOR = WHITE
 TEXTCOLOR = BLACK
 BORDERCOLOR = BLACK
-BASICFONTSIZE = 120
-OTHERFONTSIZE = 40
+BASICFONTSIZE = 40
+OTHERFONTSIZE = 120
 
 BUTTONCOLOR = WHITE
 BUTTONTEXTCOLOR = BLACK
@@ -126,8 +128,8 @@ def change_to_player(player):
 
 def drawBoard(board, message):
     DISPLAYSURF.fill(BGCOLOR)
-    game_board = pygame.image.load('./ticgameboard2.png')
-    picture = DISPLAYSURF.blit(game_board, (140, 140))
+    # game_board = pygame.image.load('./ticgameboard2.png')
+    # DISPLAYSURF.blit(game_board, (140, 140))
     if message:
         textSurf, textRect = makeText(message, MESSAGECOLOR, BGCOLOR, 5, 5)
         DISPLAYSURF.blit(textSurf, textRect)
@@ -140,8 +142,11 @@ def drawBoard(board, message):
     left, top = getLeftTopOfTile(0, 0)
     width = BOARDWIDTH * TILESIZE
     height = BOARDHEIGHT * TILESIZE
-    pygame.draw.rect(DISPLAYSURF, BORDERCOLOR, (left - 5, top - 5, width + 11, height + 11), 4)
-
+    # pygame.draw.rect(DISPLAYSURF, BORDERCOLOR, (left - 5, top - 5, width + 11, height + 11), 4)
+    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (380, 860), (380, 140), 5)
+    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (620, 860), (620, 140), 5)
+    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (140, 380), (860, 380), 5)
+    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (140, 620), (860, 620), 5)
     DISPLAYSURF.blit(NEW_SURF, NEW_RECT)
     DISPLAYSURF.blit(NEW_SURF2, NEW_RECT2)
 
@@ -166,8 +171,11 @@ def drawTile(tilex, tiley, symbol, adjx=0, adjy=0):
     pixels over (determined by adjx and adjy).
     '''
     left, top = getLeftTopOfTile(tilex, tiley)
-    pygame.draw.rect(DISPLAYSURF, WHITE, (left + adjx, top + adjy, TILESIZE, TILESIZE))
-    textSurf = BASICFONT.render(symbol_to_str(symbol), True, TEXTCOLOR)
+    pygame.draw.rect(DISPLAYSURF, TILECOLOR, (left + adjx, top + adjy, TILESIZE, TILESIZE))
+    if symbol == PLAYER_X:
+        textSurf = BASICFONT.render(symbol_to_str(symbol), True, BLUE)
+    elif symbol == PLAYER_O:
+        textSurf = BASICFONT.render(symbol_to_str(symbol), True, RED)
     textRect = textSurf.get_rect()
     textRect.center = left + int(TILESIZE / 2) + adjx, top + int(TILESIZE / 2) + adjy
     DISPLAYSURF.blit(textSurf, textRect)
@@ -206,20 +214,18 @@ def main():
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     pygame.display.set_caption('Unbeatable')
-    BASICFONT = pygame.font.Font('freesansbold.ttf', OTHERFONTSIZE)
-    NEW_SURF, NEW_RECT = makeText('vs AI', TEXTCOLOR, TILECOLOR, WINDOWWIDTH - 240, WINDOWHEIGHT - 120)
-    NEW_SURF2, NEW_RECT2 = makeText('vs Human', TEXTCOLOR, TILECOLOR, WINDOWWIDTH - 480, WINDOWHEIGHT - 120)
+    BASICFONT = pygame.font.Font('freesansbold.ttf', BASICFONTSIZE)
+    OTHERFONT = pygame.font.Font('freesansbold.ttf', OTHERFONTSIZE)
+    NEW_SURF, NEW_RECT = makeText('Unbeatable', TEXTCOLOR, TILECOLOR, WINDOWWIDTH - 240, WINDOWHEIGHT - 120)
+    NEW_SURF2, NEW_RECT2 = makeText('Easy', TEXTCOLOR, TILECOLOR, WINDOWWIDTH - 480, WINDOWHEIGHT - 120)
     board = [BLANK] * 9
     game_over = False
     x_turn = True
-    msg = "AI Tic-Tac-Toe (Rishabh and Sai)"
+    msg = "AI Tic-Tac-Toe"
     drawBoard(board, msg)
     pygame.display.update()
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+
+    while True:
         coords = None
         for event in pygame.event.get():
             if event.type == MOUSEBUTTONUP:
@@ -227,14 +233,14 @@ def main():
                 if not coords and NEW_RECT.collidepoint(event.pos):
                     board = [BLANK] * 9
                     game_over = False
-                    msg = "Ticky - Unbeatable Tic Tac Toe AI"
+                    msg = "Unbeatable Tic Tac Toe AI"
                     drawBoard(board, msg)
                     pygame.display.update()
                     two_player = False
                 if not coords and NEW_RECT2.collidepoint(event.pos):
                     board = [BLANK] * 9
                     game_over = False
-                    msg = "Ticky - Unbeatable Tic Tac Toe AI"
+                    msg = "Unbeatable Tic Tac Toe AI"
                     drawBoard(board, msg)
                     pygame.display.update()
                     two_player = True
