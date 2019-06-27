@@ -149,6 +149,7 @@ def drawBoard(board, message):
     pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (75, 375), (525, 375), 5)
     DISPLAYSURF.blit(NEW_SURF, NEW_RECT)
     DISPLAYSURF.blit(NEW_SURF2, NEW_RECT2)
+    DISPLAYSURF.blit(NEW_SURF3, NEW_RECT3)
 
 
 def getLeftTopOfTile(tileX, tileY):
@@ -208,7 +209,7 @@ def check_move_legal(coords, board):
     return board[step] == BLANK
 
 def main():
-    global FPSCLOCK, DISPLAYSURF, BASICFONT, NEW_SURF, NEW_RECT, NEW_SURF2, NEW_RECT2
+    global FPSCLOCK, DISPLAYSURF, BASICFONT, NEW_SURF, NEW_RECT, NEW_SURF2, NEW_RECT2, NEW_SURF3, NEW_RECT3
     two_player = False #by default false
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
@@ -216,8 +217,9 @@ def main():
     pygame.display.set_caption('Unbeatable')
     BASICFONT = pygame.font.Font('freesansbold.ttf', BASICFONTSIZE)
     OTHERFONT = pygame.font.Font('freesansbold.ttf', OTHERFONTSIZE)
-    NEW_SURF, NEW_RECT = makeText('Unbeatable', TEXTCOLOR, TILECOLOR, 400, 540)
-    NEW_SURF2, NEW_RECT2 = makeText('Easy', TEXTCOLOR, TILECOLOR, 120, 540)
+    NEW_SURF, NEW_RECT = makeText('Unbeatable', RED, TILECOLOR, 400, 540)
+    NEW_SURF2, NEW_RECT2 = makeText('Easy', BLUE, TILECOLOR, 120, 540)
+    NEW_SURF3, NEW_RECT3 = makeText('Tic-Tac-Toe AI Game', TEXTCOLOR, TILECOLOR, 200, 20)
     board = [BLANK] * 9
     game_over = False
     x_turn = True

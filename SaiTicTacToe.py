@@ -44,20 +44,6 @@ def is_valid_move(board, location):
 # I - board: a 3x3 representation of the board as a nested list
 # R - True if the user now has 3 marks in a row, False if the user does not
 
-#Old code
-	'''
-	for i in range (0,3):
-		if board[i][i + 1] == "X" or	board[i][i + 1] == "O":
-			return True
-		elif board[i + 1][i] == "X" or board[i + 1][i] == "O":
-			return True
-		elif board[i + 1][i - 1] == "X" or board[i + 1][i - 1] == "O":
-			return True
-		elif board[i + 1][i + 1] == "X" or board[i + 1][i + 1] == "O":
-			return True
-	return False
-	'''
-	
 def winning_move(board):
 	# Check for horizontals
 	for row in range(0,3):
