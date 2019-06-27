@@ -127,7 +127,7 @@ def change_to_player(player):
 def drawBoard(board, message):
     DISPLAYSURF.fill(BGCOLOR)
     game_board = pygame.image.load('./ticgameboard2.png')
-    DISPLAYSURF.blit(game_board, (140, 140))
+    picture = DISPLAYSURF.blit(game_board, (140, 140))
     if message:
         textSurf, textRect = makeText(message, MESSAGECOLOR, BGCOLOR, 5, 5)
         DISPLAYSURF.blit(textSurf, textRect)
@@ -166,7 +166,7 @@ def drawTile(tilex, tiley, symbol, adjx=0, adjy=0):
     pixels over (determined by adjx and adjy).
     '''
     left, top = getLeftTopOfTile(tilex, tiley)
-    pygame.draw.rect(DISPLAYSURF, TILECOLOR, (left + adjx, top + adjy, TILESIZE, TILESIZE))
+    pygame.draw.rect(DISPLAYSURF, WHITE, (left + adjx, top + adjy, TILESIZE, TILESIZE))
     textSurf = BASICFONT.render(symbol_to_str(symbol), True, TEXTCOLOR)
     textRect = textSurf.get_rect()
     textRect.center = left + int(TILESIZE / 2) + adjx, top + int(TILESIZE / 2) + adjy
@@ -215,8 +215,11 @@ def main():
     msg = "AI Tic-Tac-Toe (Rishabh and Sai)"
     drawBoard(board, msg)
     pygame.display.update()
-
-    while True:
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
         coords = None
         for event in pygame.event.get():
             if event.type == MOUSEBUTTONUP:
