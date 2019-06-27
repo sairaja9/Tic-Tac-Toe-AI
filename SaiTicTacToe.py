@@ -146,7 +146,7 @@ while not game_over:
 	while not is_valid_move(board, location):
 		print('Not a valid move')
 		location = int(input("\n{}, please choose a location to place your X: ".format(current_player)))
-	convert_to_board_index(board, location)
+	    convert_to_board_index(board, location)
 		# print('board after choose: ',board)
 	# 3. Print the current board
 	# print(board)
