@@ -5,7 +5,7 @@ from pygame.locals import *
 # Create the constants (go ahead and experiment with different values)
 BOARDWIDTH = 3  # number of columns in the board
 BOARDHEIGHT = 3 # number of rows in the board
-TILESIZE = 200
+TILESIZE = 240
 WINDOWWIDTH = 1000
 WINDOWHEIGHT = 1000
 FPS = 60
@@ -16,7 +16,7 @@ BLACK =         (  0,   0,   0)
 WHITE =         (255, 255, 255)
 
 BGCOLOR = WHITE
-TILECOLOR = WHITE
+TILECOLOR = None
 TEXTCOLOR = BLACK
 BORDERCOLOR = BLACK
 BASICFONTSIZE = 120
@@ -126,6 +126,8 @@ def change_to_player(player):
 
 def drawBoard(board, message):
     DISPLAYSURF.fill(BGCOLOR)
+    game_board = pygame.image.load('./ticgameboard2.png')
+    DISPLAYSURF.blit(game_board, (140, 140))
     if message:
         textSurf, textRect = makeText(message, MESSAGECOLOR, BGCOLOR, 5, 5)
         DISPLAYSURF.blit(textSurf, textRect)
