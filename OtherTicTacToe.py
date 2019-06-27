@@ -5,9 +5,9 @@ from pygame.locals import *
 # Create the constants (go ahead and experiment with different values)
 BOARDWIDTH = 3  # number of columns in the board
 BOARDHEIGHT = 3 # number of rows in the board
-TILESIZE = 240
-WINDOWWIDTH = 1000
-WINDOWHEIGHT = 1000
+TILESIZE = 150
+WINDOWWIDTH = 600
+WINDOWHEIGHT = 600
 FPS = 60
 BLANK = None
 
@@ -21,7 +21,7 @@ BGCOLOR = WHITE
 TILECOLOR = WHITE
 TEXTCOLOR = BLACK
 BORDERCOLOR = BLACK
-BASICFONTSIZE = 40
+BASICFONTSIZE = 20
 OTHERFONTSIZE = 120
 
 BUTTONCOLOR = WHITE
@@ -143,10 +143,10 @@ def drawBoard(board, message):
     width = BOARDWIDTH * TILESIZE
     height = BOARDHEIGHT * TILESIZE
     # pygame.draw.rect(DISPLAYSURF, BORDERCOLOR, (left - 5, top - 5, width + 11, height + 11), 4)
-    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (380, 860), (380, 140), 5)
-    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (620, 860), (620, 140), 5)
-    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (140, 380), (860, 380), 5)
-    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (140, 620), (860, 620), 5)
+    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (225, 525), (225, 75), 5)
+    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (375, 525), (375, 75), 5)
+    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (75, 225), (525, 225), 5)
+    pygame.draw.line(DISPLAYSURF, BORDERCOLOR, (75, 375), (525, 375), 5)
     DISPLAYSURF.blit(NEW_SURF, NEW_RECT)
     DISPLAYSURF.blit(NEW_SURF2, NEW_RECT2)
 
@@ -216,8 +216,8 @@ def main():
     pygame.display.set_caption('Unbeatable')
     BASICFONT = pygame.font.Font('freesansbold.ttf', BASICFONTSIZE)
     OTHERFONT = pygame.font.Font('freesansbold.ttf', OTHERFONTSIZE)
-    NEW_SURF, NEW_RECT = makeText('Unbeatable', TEXTCOLOR, TILECOLOR, WINDOWWIDTH - 240, WINDOWHEIGHT - 120)
-    NEW_SURF2, NEW_RECT2 = makeText('Easy', TEXTCOLOR, TILECOLOR, WINDOWWIDTH - 480, WINDOWHEIGHT - 120)
+    NEW_SURF, NEW_RECT = makeText('Unbeatable', TEXTCOLOR, TILECOLOR, 400, 540)
+    NEW_SURF2, NEW_RECT2 = makeText('Easy', TEXTCOLOR, TILECOLOR, 120, 540)
     board = [BLANK] * 9
     game_over = False
     x_turn = True
