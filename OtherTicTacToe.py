@@ -227,7 +227,11 @@ def main():
     drawBoard(board, msg)
     pygame.display.update()
 
-    while True:
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
         coords = None
         for event in pygame.event.get():
             if event.type == MOUSEBUTTONUP:
