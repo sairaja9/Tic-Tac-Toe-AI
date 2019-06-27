@@ -5,8 +5,6 @@ screen = pygame.display.set_mode((600, 600))
 pygame.display.set_caption("Tic Tac Toe by Sai and Rishabh")
 bg = pygame.image.load('ticgameboard2.png')
 
-WHITE = (255,255,255)
-
 class player(object):
     def __init__(self,x,y,width,height):
         self.x = x
@@ -15,7 +13,6 @@ class player(object):
         self.height = height
     
 def redrawGameWindow():
-    screen.fill(WHITE)
     screen.blit(bg, (0,0))
 
 run = True
