@@ -9,9 +9,6 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-
-    ev = pygame.event.get()
-    for event in ev:
-        if ev == pygame.MOUSEBUTTONUP:
+        elif event.type == pygame.MOUSEBUTTONUP:
             coordinates = pygame.mouse.get_pos()
             print(coordinates)
